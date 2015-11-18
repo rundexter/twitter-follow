@@ -15,7 +15,7 @@ module.exports = {
         var twitter = new Twitter(authOptions);
 
         // Allows the authenticating users to follow the user specified in the ID parameter.
-        twitter.postCreateFriendship(params, callback);
+        twitter.postCreateFriendship(params, errorCallback, successCallback);
     },
     /**
      * The main entry point for the Dexter module

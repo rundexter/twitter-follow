@@ -36,15 +36,13 @@ module.exports = {
             }
         }, this);
 
-        this.follow(authOptions, step.inputs(), function (error, tweets) {
+        this.follow(authOptions, step.inputs(), function (error, befriendedInfo) {
             if (error) {
                 // if error - send message
                 this.fail(error);
             }
-            // return tweets
-            this.complete(tweets);
+            // return befriendedInfo
+            this.complete(befriendedInfo);
         }.bind(this));
-
-        this.complete(step.inputs());
     }
 };

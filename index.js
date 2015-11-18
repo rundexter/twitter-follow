@@ -5,7 +5,7 @@ var requiredEnv = ['twitter_consumer_key', 'twitter_consumer_secret', 'twitter_a
 module.exports = {
     follow: function (authOptions, params, callback) {
         var client = new Twitter(authOptions);
-        
+
         // Allows the authenticating users to follow the user specified in the ID parameter.
         client.get('friendships/create', params, callback);
     },
@@ -28,9 +28,9 @@ module.exports = {
                 authOptions[prop] = dexter.environment(envVar);
             } else {
 
-                this.fail('A ' + envKey + ' environment variable is required for this module');
+                this.fail('A ' + envVar + ' environment variable is required for this module');
             }
-        });
+        }, this);
 
         this.follow(authOptions, step.inputs(), function (error, tweets) {
 

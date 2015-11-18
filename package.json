@@ -8,6 +8,6 @@
   "private": true,
   "dependencies": {
     "lodash": "^3.10.1",
-    "twitter": "^1.2.5"
+    "twitter-node-client": "0.0.6"
   }
 }

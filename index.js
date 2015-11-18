@@ -13,16 +13,17 @@ module.exports = {
     follow: function (authOptions, params, callback) {
         var twitter = new Twit(authOptions);
 
-        // Follow
+        // Follow befriended
         twitter.post('friendships/create', params, callback);
     },
+
     /**
-     * Allows the authenticating users to follow the user specified in the ID parameter.
+     * Get Auth options from Environment.
      *
-     * @param {AppStep} step Accessor for the configuration for the step using this module.  Use step.input('{key}') to retrieve input data.
-     * @param {AppData} dexter Container for all data used in this workflow.
+     * @param dexter
+     * @returns {{}}
      */
-    run: function(step, dexter) {
+    authOptions: function (dexter) {
         // twitter auth property
         var authOptions = {};
 
@@ -36,7 +37,18 @@ module.exports = {
             }
         }, this);
 
-        this.follow(authOptions, step.inputs(), function (error, befriendedInfo) {
+        return authOptions;
+    },
+
+    /**
+     * Allows the authenticating users to follow the user specified in the ID parameter.
+     *
+     * @param {AppStep} step Accessor for the configuration for the step using this module.  Use step.input('{key}') to retrieve input data.
+     * @param {AppData} dexter Container for all data used in this workflow.
+     */
+    run: function(step, dexter) {
+
+        this.follow(this.authOptions(dexter), step.inputs(), function (error, befriendedInfo) {
             if (error) {
                 // if error - send message
                 this.fail(error);

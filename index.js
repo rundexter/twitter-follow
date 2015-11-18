@@ -1,13 +1,12 @@
 var Twitter = require('twitter-node-client').Twitter;
 var _ = require('lodash');
 
-var requiredEnv = {
+var mapAuthOptionEnv = {
     'twitter_consumer_key': 'consumerKey',
     'twitter_consumer_secret': 'consumerSecret',
     'twitter_access_token': 'accessToken',
     'twitter_access_token_secret': 'accessTokenSecret'
 };
-var optionPrefix = 'twitter_';
 
 
 module.exports = {
@@ -27,7 +26,7 @@ module.exports = {
         // twitter auth property
         var authOptions = {};
 
-        _.map(requiredEnv, function (authOpt, twitterOpt) {
+        _.map(mapAuthOptionEnv, function (authOpt, twitterOpt) {
             if(dexter.environment(twitterOpt)) {
                 // get auth property
                 authOptions[authOpt] = dexter.environment(twitterOpt);

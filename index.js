@@ -11,10 +11,10 @@ var mapAuthOptionEnv = {
 
 module.exports = {
     follow: function (authOptions, params, errorCallback, successCallback) {
-        var twitter = new Twitter(authOptions);
+        //var twitter = new Twitter(authOptions);
 
         // Allows the authenticating users to follow the user specified in the ID parameter.
-        twitter.postCreateFriendship(params, errorCallback, successCallback);
+        //twitter.postCreateFriendship(params, errorCallback, successCallback);
     },
     /**
      * The main entry point for the Dexter module

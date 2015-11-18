@@ -19,10 +19,10 @@
     ],
     //Required. Outputs the module emits.
     "outputs": [
-        {
-            "id": "befriended_info",
-            "title":"befriended_info"
-        }
+//        {
+//            "id": "befriended_info",
+//            "title":"befriended_info"
+//        }
     ],
     "title": "Twitter Follow"  /* Required.A display name for the module */
 }

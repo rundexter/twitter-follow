@@ -1,20 +1,20 @@
-var Twitter = require('twitter-node-client').Twitter;
+var Twit = require('twit');
 var _ = require('lodash');
 
-var mapAuthOptionEnv = {
-    'twitter_consumer_key': 'consumerKey',
-    'twitter_consumer_secret': 'consumerSecret',
-    'twitter_access_token': 'accessToken',
-    'twitter_access_token_secret': 'accessTokenSecret'
+var mapAuthOptionsEnv = {
+    'twitter_consumer_key': 'consumer_key',
+    'twitter_consumer_secret': 'consumer_secret',
+    'twitter_access_token': 'access_token',
+    'twitter_access_token_secret': 'access_token_secret'
 };
 
 
 module.exports = {
-    follow: function (authOptions, params, errorCallback, successCallback) {
-        //var twitter = new Twitter(authOptions);
+    follow: function (authOptions, params, callback) {
+        var twitter = new Twit(authOptions);
 
         // Allows the authenticating users to follow the user specified in the ID parameter.
-        //twitter.postCreateFriendship(params, errorCallback, successCallback);
+        twitter.post('friendships/create', params, callback);
     },
     /**
      * The main entry point for the Dexter module
@@ -26,7 +26,7 @@ module.exports = {
         // twitter auth property
         var authOptions = {};
 
-        _.map(mapAuthOptionEnv, function (authOpt, twitterOpt) {
+        _.map(mapAuthOptionsEnv, function (authOpt, twitterOpt) {
             if(dexter.environment(twitterOpt)) {
                 // get auth property
                 authOptions[authOpt] = dexter.environment(twitterOpt);
@@ -36,15 +36,15 @@ module.exports = {
             }
         }, this);
 
-        this.follow(authOptions, step.inputs(), function (error) {
-            // if error - send message
-            this.fail(error);
-
-        }, function (tweets) {
+        this.follow(authOptions, step.inputs(), function (error, tweets) {
+            if (error) {
+                // if error - send message
+                this.fail(error);
+            }
             // return tweets
             this.complete(tweets);
-
         }.bind(this));
 
+        this.complete(step.inputs());
     }
 };

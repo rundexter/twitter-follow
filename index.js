@@ -1,13 +1,21 @@
 var Twitter = require('twitter');
+var _ = require('lodash');
+
+var requiredEnv = {
+    'twitter_consumer_key': 'consumer_key',
+    'twitter_consumer_secret': 'consumer_secret',
+    'twitter_access_token': 'access_token_key',
+    'twitter_access_token_secret': 'access_token_secret'
+};
 var optionPrefix = 'twitter_';
-var requiredEnv = ['twitter_consumer_key', 'twitter_consumer_secret', 'twitter_access_token', 'twitter_access_token_secret'];
+
 
 module.exports = {
     follow: function (authOptions, params, callback) {
         var client = new Twitter(authOptions);
 
         // Allows the authenticating users to follow the user specified in the ID parameter.
-        client.get('friendships/create', params, callback);
+        client.post('friendships/create', params, callback);
     },
     /**
      * The main entry point for the Dexter module
@@ -19,27 +27,23 @@ module.exports = {
         // twitter auth property
         var authOptions = {};
 
-        requiredEnv.forEach(function (envVar) {
-
-            if(dexter.environment(envVar)) {
+        _.map(requiredEnv, function (authOpt, twitterOpt) {
+            if(dexter.environment(twitterOpt)) {
                 // get auth property
-                var prop = envVar.substr(optionPrefix.length -1, -1);
-
-                authOptions[prop] = dexter.environment(envVar);
+                authOptions[authOpt] = dexter.environment(twitterOpt);
             } else {
 
-                this.fail('A ' + envVar + ' environment variable is required for this module');
+                this.fail('A ' + twitterOpt + ' environment variable is required for this module');
             }
         }, this);
 
         this.follow(authOptions, step.inputs(), function (error, tweets) {
-
             if (error) {
                 // if error - send message
                 this.fail(error);
             }
             // return tweets
-            this.comcomplete(tweets);
+            this.complete(tweets);
         }.bind(this));
     }
 };

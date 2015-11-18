@@ -41,8 +41,10 @@ module.exports = _.merge({
         * Any API keys you might need should go in the env.js.
         * For example:
         *
-        "parse_app_id": "abc123"
-        , "parse_app_key": "foobar"
+        "twitter_consumer_key": 'twitter_consumer_key',
+        "twitter_consumer_secret": 'twitter_consumer_secret',
+        "twitter_access_token": 'twitter_access_token',
+        "twitter_access_token_secret": 'twitter_access_token_secret'
         */
     }
     , user: {
@@ -63,7 +65,9 @@ module.exports = _.merge({
              */
             input: {
                 //Replace VAR1 with the name of an expected input, and add more inputs as needed.
-                VAR1: 'foo'
+                screen_name: 'noradio',
+                user_id: '12345',
+                follow: true
             }
         }
     }

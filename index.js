@@ -13,11 +13,11 @@ module.exports = {
     follow: function (authOptions, params, callback) {
         var twitter = new Twit(authOptions);
 
-        // Allows the authenticating users to follow the user specified in the ID parameter.
+        // Follow
         twitter.post('friendships/create', params, callback);
     },
     /**
-     * The main entry point for the Dexter module
+     * Allows the authenticating users to follow the user specified in the ID parameter.
      *
      * @param {AppStep} step Accessor for the configuration for the step using this module.  Use step.input('{key}') to retrieve input data.
      * @param {AppData} dexter Container for all data used in this workflow.
@@ -31,7 +31,7 @@ module.exports = {
                 // get auth property
                 authOptions[authOpt] = dexter.environment(twitterOpt);
             } else {
-
+                // catch no-arguments message
                 this.fail('A ' + twitterOpt + ' environment variable is required for this module');
             }
         }, this);

@@ -54,7 +54,7 @@ module.exports = {
                 this.fail(error);
             }
             // return befriendedInfo
-            this.complete(befriendedInfo);
+            this.complete(_.pick(befriendedInfo, ['screen_name', 'follow_request_sent', 'following']));
         }.bind(this));
     }
 };

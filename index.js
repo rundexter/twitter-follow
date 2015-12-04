@@ -47,7 +47,7 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
-
+console.log(step.inputs());
         this.follow(this.authOptions(dexter), step.inputs(), function (error, befriendedInfo) {
             if (error) {
                 // if error - send message

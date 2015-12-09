@@ -24,5 +24,6 @@
             "title":"befriended_info"
         }
     ],
+    "icon": "twitter",
     "title": "Twitter Follow"  /* Required.A display name for the module */
 }

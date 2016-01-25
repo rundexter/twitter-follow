@@ -24,6 +24,9 @@
             "title":"befriended_info"
         }
     ],
+    "providers": [{
+        "name": "twitter"
+    }],
     "icon": "twitter",
     "title": "Twitter Follow"  /* Required.A display name for the module */
 }
